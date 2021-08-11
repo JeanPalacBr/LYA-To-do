@@ -1,7 +1,7 @@
 import 'package:fab_menu_items/fab_menu_items.dart';
 import 'package:flutter/material.dart';
 import 'package:lya_to_do/Models/todo.dart';
-
+import 'package:lya_to_do/UI/NewToDoDialog.dart';
 import 'CardTodo.dart';
 
 class Home extends StatefulWidget {
@@ -28,56 +28,67 @@ class _HomeState extends State<Home> {
         ),
         Fabmenuitems(
           height: 160,
-          weith: 150,
+          weith: 180,
           animatedIcons: AnimatedIcons.add_event,
           fabcolor: Colors.blue.shade200,
           containercolor: Colors.white,
           childrens: <Widget>[
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.plus_one,
-                    size: 24,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                      child: Text(
-                    "Agregar una tarea",
-                    style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
-                  ))
-                ],
+              child: InkWell(
+                onTap: () {
+                  print("holo");
+                  _addTodo();
+                },
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.plus_one,
+                      size: 24,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "Agregar una tarea",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ))
+                  ],
+                ),
               ),
             ),
             Divider(),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.add,
-                    size: 24,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Expanded(
-                      child: Text(
-                    "Agregar varias tareas",
-                    style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500),
-                  ))
-                ],
+              child: InkWell(
+                onTap: () {
+                  print("holaaa");
+                },
+                child: Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.add,
+                      size: 24,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Expanded(
+                        child: Text(
+                      "Agregar varias tareas",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ))
+                  ],
+                ),
               ),
             ),
             Divider(),
@@ -116,5 +127,18 @@ class _HomeState extends State<Home> {
 
   Widget _item(Todo element, int posicion) {
     return Text('$posicion');
+  }
+
+  void _addTodo() async {
+    final todo = await showDialog<Todo>(
+        context: context,
+        builder: (BuildContext context) {
+          return NewTodoDialog();
+        });
+    if (todo != null) {
+      setState(() {
+        todos.add(todo);
+      });
+    }
   }
 }

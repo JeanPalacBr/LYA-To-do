@@ -7,7 +7,6 @@ class CardTodo extends StatelessWidget {
   CardTodo(this.todod);
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Card(
       color: todod.completed == 1 ? Colors.blueGrey : Colors.yellow[200],
       child: Row(
