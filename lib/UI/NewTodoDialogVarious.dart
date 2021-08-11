@@ -8,8 +8,7 @@ class NewTodoDialog extends StatefulWidget {
 }
 
 class _NewTodoDialogState extends State<NewTodoDialog> {
-  final controllerTitle = new TextEditingController();
-  final controllerBody = new TextEditingController();
+  final controllerAmount = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -23,15 +22,10 @@ class _NewTodoDialogState extends State<NewTodoDialog> {
           Expanded(
               child: new TextField(
             autofocus: true,
-            controller: controllerTitle,
-            decoration: new InputDecoration(labelText: 'Título'),
-          )),
-          Expanded(
-              child: new TextField(
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-            controller: controllerBody,
-            decoration: new InputDecoration(labelText: 'Descripción'),
+            controller: controllerAmount,
+            keyboardType: TextInputType.number,
+            decoration:
+                new InputDecoration(labelText: 'Cantidad de tareas a agregar'),
           )),
         ],
       ),
@@ -43,14 +37,10 @@ class _NewTodoDialogState extends State<NewTodoDialog> {
           },
         ),
         TextButton(
-            child: Text('Guardar'),
+            child: Text('Crear'),
             onPressed: () {
-              final todo = new Todo(
-                  title: controllerTitle.value.text,
-                  description: controllerBody.value.text,
-                  completed: 0);
-              controllerTitle.clear();
-              controllerBody.clear();
+              final todo = new Todo(completed: 0);
+              controllerAmount.clear();
 
               Navigator.of(context).pop(todo);
             })

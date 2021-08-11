@@ -102,19 +102,48 @@ class _HomeState extends State<Home> {
     return ListView.builder(
       itemCount: todos.length,
       itemBuilder: (context, posicion) {
-        var element = todos[posicion];
         return Dismissible(
+          //direction: DismissDirection.startToEnd,
           key: ObjectKey(todos[posicion]),
           background: Container(
               color: Colors.red,
               alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                "Deleting",
-                style: TextStyle(color: Colors.white),
+              child: Row(
+                children: [
+                  Icon(Icons.delete, color: Colors.white),
+                  Text(
+                    "Borrar tarea",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
               )),
-          //Icon(Icons.delete, color: Colors.white)),
+          secondaryBackground: Container(
+            color: Colors.green,
+            child: Align(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    " Editar tarea",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                ],
+              ),
+              alignment: Alignment.centerRight,
+            ),
+          ),
           child: CardTodo(todos[posicion]),
-
           onDismissed: (direction) {
             setState(() {
               todos.removeAt(posicion);
@@ -125,10 +154,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _item(Todo element, int posicion) {
-    return Text('$posicion');
-  }
-
   void _addTodo() async {
     final todo = await showDialog<Todo>(
         context: context,
@@ -137,6 +162,7 @@ class _HomeState extends State<Home> {
         });
     if (todo != null) {
       setState(() {
+        todo.id = todos.length;
         todos.add(todo);
       });
     }
