@@ -1,5 +1,8 @@
 import 'package:fab_menu_items/fab_menu_items.dart';
 import 'package:flutter/material.dart';
+import 'package:lya_to_do/Models/todo.dart';
+
+import 'CardTodo.dart';
 
 class Home extends StatefulWidget {
   const Home();
@@ -9,6 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  List<Todo> todos = <Todo>[];
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -19,7 +23,7 @@ class _HomeState extends State<Home> {
             title: Text("LYA To Do APP"),
           ),
           body: Center(
-            child: Text("LYA To Do APP"),
+            child: _list(),
           ),
         ),
         Fabmenuitems(
@@ -81,5 +85,36 @@ class _HomeState extends State<Home> {
         )
       ],
     );
+  }
+
+  Widget _list() {
+    return ListView.builder(
+      itemCount: todos.length,
+      itemBuilder: (context, posicion) {
+        var element = todos[posicion];
+        return Dismissible(
+          key: ObjectKey(todos[posicion]),
+          background: Container(
+              color: Colors.red,
+              alignment: AlignmentDirectional.centerStart,
+              child: Text(
+                "Deleting",
+                style: TextStyle(color: Colors.white),
+              )),
+          //Icon(Icons.delete, color: Colors.white)),
+          child: CardTodo(todos[posicion]),
+
+          onDismissed: (direction) {
+            setState(() {
+              todos.removeAt(posicion);
+            });
+          },
+        );
+      },
+    );
+  }
+
+  Widget _item(Todo element, int posicion) {
+    return Text('$posicion');
   }
 }
