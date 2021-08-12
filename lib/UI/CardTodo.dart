@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lya_to_do/Models/todo.dart';
-import 'package:lya_to_do/UI/edit.dart';
 
 class CardTodo extends StatefulWidget {
   Todo todod;
@@ -35,15 +34,6 @@ class _CardTodoState extends State<CardTodo> {
               ),
             );
           }
-        });
-      },
-      onTap: () {
-        final res = Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EditActivity(widget.todod)));
-        setState(() {
-          // widget.todod.description = res.then((value as Todo) => )
         });
       },
       child: Padding(

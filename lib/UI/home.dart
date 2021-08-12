@@ -1,9 +1,11 @@
 import 'package:fab_menu_items/fab_menu_items.dart';
 import 'package:flutter/material.dart';
 import 'package:lya_to_do/Models/todo.dart';
+import 'package:lya_to_do/UI/EditTodoDialog.dart';
 import 'package:lya_to_do/UI/NewToDoDialog.dart';
 import 'package:lya_to_do/UI/NewTodoDialogVarious.dart';
 import 'package:lya_to_do/UI/SearchResult.dart';
+import 'package:lya_to_do/UI/edit.dart';
 import 'CardTodo.dart';
 
 class Home extends StatefulWidget {
@@ -149,7 +151,7 @@ class _HomeState extends State<Home> {
             itemBuilder: (context, posicion) {
               return Dismissible(
                 //direction: DismissDirection.startToEnd,
-                key: ObjectKey(todos[posicion]),
+                key: UniqueKey(),
                 background: Container(
                     color: Colors.red,
                     alignment: AlignmentDirectional.centerStart,
@@ -190,9 +192,18 @@ class _HomeState extends State<Home> {
                 ),
                 child: CardTodo(todos[posicion]),
                 onDismissed: (direction) {
-                  setState(() {
-                    todos.removeAt(posicion);
-                  });
+                  if (direction == DismissDirection.startToEnd) {
+                    setState(() {
+                      todos.removeAt(posicion);
+                    });
+                  } else {
+                    _editTodo(todos[posicion], posicion);
+                    // Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) =>
+                    //             EditActivity(todos[posicion])));
+                  }
                 },
               );
             },
@@ -231,16 +242,15 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void _editTodo() async {
+  void _editTodo(Todo aEditar, int posicion) async {
     final todo = await showDialog<Todo>(
         context: context,
         builder: (BuildContext context) {
-          return NewTodoDialog();
+          return EditTodoDialog(aEditar);
         });
     if (todo != null) {
       setState(() {
-        todo.id = todos.length;
-        todos.add(todo);
+        todos[posicion] = todo;
       });
     }
   }
