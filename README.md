@@ -1,4 +1,4 @@
-# LYA To do Instruciones
+# LYA To do - Instruciones
 
 Es un gestor de actividades.
 
