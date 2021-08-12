@@ -4,8 +4,6 @@ import 'package:lya_to_do/Models/todo.dart';
 import 'package:lya_to_do/UI/EditTodoDialog.dart';
 import 'package:lya_to_do/UI/NewToDoDialog.dart';
 import 'package:lya_to_do/UI/NewTodoDialogVarious.dart';
-import 'package:lya_to_do/UI/SearchResult.dart';
-import 'package:lya_to_do/UI/edit.dart';
 import 'CardTodo.dart';
 
 class Home extends StatefulWidget {
@@ -17,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Todo> todos = <Todo>[];
+  List<Todo> auxtodos = <Todo>[];
   List<Todo> resbusqtodos = <Todo>[];
   TextEditingController busqueda = new TextEditingController();
   bool searching = false;
@@ -42,11 +41,19 @@ class _HomeState extends State<Home> {
                           resbusqtodos.add(todos[i]);
                         }
                       }
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  SearchResult(resbusqtodos)));
+                      if (resbusqtodos.length > 0) {
+                        setState(() {
+                          encontrado = true;
+                          auxtodos = todos;
+                          todos = resbusqtodos;
+                        });
+                      }
+
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) =>
+                      //             SearchResult(resbusqtodos)));
                     },
                   ),
             actions: <Widget>[
@@ -59,6 +66,10 @@ class _HomeState extends State<Home> {
                         setState(() {
                           this.searching = !this.searching;
                           busqueda.clear();
+                          if (!searching) {
+                            todos = auxtodos;
+                            resbusqtodos.clear();
+                          }
                         });
                       }),
                 ],
