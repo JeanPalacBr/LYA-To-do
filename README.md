@@ -1,16 +1,26 @@
 # lya_to_do
 
-A new Flutter project.
+Es un gestor de actividades.
 
-## Getting Started
+Permite:
+* Ver una lista con las actividades.
+* Agregar nuevas actividades a la lista.
+* Marcar una actividad como realizada.
+* Eliminar una actividad de la lista.
+* Editar la información de una actividad.
+* Filtrar lista de actividades por texto de descripción.
+* Permitir al usuario llenar la lista de actividades con frases aleatorias de gatos, indicando cuantas quiere agregar.
 
-This project is a starting point for a Flutter application.
+Instrucciones:
+*Para agregar una tarea pulsar el botón azul en la parte inferior derecha de la pantalla principal y seleccionar la opción "Agregar una tarea". Luego, llenar el formulario que se muestra y pulsar en guardar.
 
-A few resources to get you started if this is your first Flutter project:
+*Si desea agregar más de una actividad a la vez, debe pulsar en el botón azul ubicado en la parte inferior derecha de la pantalla y seleccionar "Agregar varias tareas"
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+*Para marcar una actividad como realizada, debe pulsar dos veces sobre esta en la lista.
+*Para borrar una actividad, deslícela hacia la derecha en la lista.
+*Para editar una actividad, deslícela hacia la izquierda en la lista.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+*Para realizar una búsqueda, seleccione la lupa ubicada en la esquina superior izquierda, a continuación, escriba la palabra por la cual se desea filtrar las descripciones de las actividades, luego presione la lupa que se encuentra en el teclado en pantalla del teléfono.
+
+*Para quitar el filtro seleccione la X ubicada en la esquina superior izquierda de la pantalla.
+
