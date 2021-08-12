@@ -3,5 +3,5 @@ class Todo {
   String title;
   String description;
   int completed;
-  Todo({this.title, this.description, this.completed});
+  Todo({this.title, this.description, this.completed, this.id});
 }
