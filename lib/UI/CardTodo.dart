@@ -38,10 +38,13 @@ class _CardTodoState extends State<CardTodo> {
         });
       },
       onTap: () {
-        Navigator.push(
+        final res = Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => EditActivity(widget.todod)));
+        setState(() {
+          // widget.todod.description = res.then((value as Todo) => )
+        });
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),

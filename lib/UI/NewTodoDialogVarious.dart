@@ -43,20 +43,23 @@ class _NewTodoDialogVariousState extends State<NewTodoDialogVarious> {
           ),
           TextButton(
               child: Text('Crear'),
-              onPressed: () {
-                getFacts(controllerAmount.value.text).then((value) {
+              onPressed: () async {
+                var value = await getFacts(controllerAmount.value.text);
+                if (value != null) {
                   print("value");
                   for (var i = 0; i < value.length; i++) {
                     final todo = new Todo(
                         completed: 0,
                         description: value[i].fact,
                         title: "Actividad" + i.toString());
+                    cats.add(todo);
                   }
-                });
-                final todo = new Todo(completed: 0);
+                }
+
+//                final todo = new Todo(completed: 0);
                 controllerAmount.clear();
 
-                Navigator.of(context).pop(todo);
+                Navigator.of(context).pop(cats);
               })
         ],
       ),

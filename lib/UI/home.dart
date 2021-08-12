@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lya_to_do/Models/todo.dart';
 import 'package:lya_to_do/UI/NewToDoDialog.dart';
 import 'package:lya_to_do/UI/NewTodoDialogVarious.dart';
+import 'package:lya_to_do/UI/SearchResult.dart';
 import 'CardTodo.dart';
 
 class Home extends StatefulWidget {
@@ -14,6 +15,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   List<Todo> todos = <Todo>[];
+  List<Todo> resbusqtodos = <Todo>[];
   TextEditingController busqueda = new TextEditingController();
   bool searching = false;
   bool encontrado = false;
@@ -33,11 +35,16 @@ class _HomeState extends State<Home> {
                         hintStyle: TextStyle(color: Colors.white),
                         fillColor: Colors.white),
                     onSubmitted: (busqueda) {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             SearchResult(busqueda)));
+                      for (var i = 0; i < todos.length; i++) {
+                        if (todos[i].description.contains(busqueda)) {
+                          resbusqtodos.add(todos[i]);
+                        }
+                      }
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SearchResult(resbusqtodos)));
                     },
                   ),
             actions: <Widget>[
@@ -210,15 +217,16 @@ class _HomeState extends State<Home> {
   }
 
   void _addTodoVarios() async {
-    final todo = await showDialog<Todo>(
+    final List<Todo> todo = await showDialog<List<Todo>>(
         context: context,
         builder: (BuildContext context) {
           return NewTodoDialogVarious();
         });
     if (todo != null) {
       setState(() {
-        todo.id = todos.length;
-        todos.add(todo);
+        //todo.id = todos.length;
+
+        todos = todos + todo;
       });
     }
   }

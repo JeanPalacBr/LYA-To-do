@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lya_to_do">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="lya_to_do"
         android:icon="@mipmap/ic_launcher">
